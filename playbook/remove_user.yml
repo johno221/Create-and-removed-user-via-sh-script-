@@ -1,0 +1,33 @@
+---
+- name: removed a user from dedicated servers 
+  hosts: local
+  become: yes
+  vars:
+    usrname: "{{ username }}"
+
+  tasks:
+  - name: handle error
+    block:
+      - name: Get info if a user exist
+        getent:
+          database: passwd
+          key: "{{ usrname }}"
+
+    rescue:
+      - name: Print errors
+        ansible.builtin.fail:
+          msg: 'The user {{ usrname }} does not exist, please add existing name'
+    
+  - name: Delete a user 
+    ansible.builtin.user:
+      name: "{{ usrname }}"
+      state: absent
+    register: __user
+
+  - debug:
+      msg: 'User {{ usrname }} has been removed'
+    when: __user.changed == true
+
+
+
+     # sudo ansible-playbook -i hosts playbook/remove_user.yml -vvvv --extra-vars "username=<ADD HERE USER NAME>"
