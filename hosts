@@ -1,0 +1,8 @@
+[local]
+localhost ansible_connection=local
+
+[exp_dev]
+gitlab-dev-sk.expersoft.site
+
+[gitlab]
+gitlab-dev.expersoft.site

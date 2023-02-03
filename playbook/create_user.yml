@@ -1,0 +1,15 @@
+---
+- name: removed user from dedicated servers 
+  hosts: local
+  vars: 
+    usrname: "{{ username }}"
+
+  tasks:
+
+    - name: Delete a user
+      ansible.builtin.user:
+        name: "{{ usrname }}"
+      # local: true
+        state: present
+
+#sudo ansible-playbook -i hosts playbook/createuser.yml -vvvv --extra-vars "username=jbl23"
