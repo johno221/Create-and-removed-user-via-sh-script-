@@ -28,6 +28,5 @@
       msg: 'User {{ usrname }} has been removed'
     when: __user.changed == true
 
-
-
-     # sudo ansible-playbook -i hosts playbook/remove_user.yml -vvvv --extra-vars "username=<ADD HERE USER NAME>"
+    #run playbook
+     # ansible-playbook -i hosts playbook/remove_user.yml -vvvv --extra-vars "username=<ADD HERE USER NAME>"
